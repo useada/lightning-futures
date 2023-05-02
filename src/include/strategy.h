@@ -12,6 +12,7 @@ public :
 	class param
 	{
 		std::map<std::string, std::string> _param;
+	
 	public:
 		param(const char* str);
 
@@ -20,7 +21,8 @@ public :
 		{
 			return get<T>(std::string(key));
 		}
-
+	
+	private:
 		template <typename T>
 		typename std::enable_if<std::is_same<T, const char *>::value, T>::type get(const std::string &key) const
 		{
