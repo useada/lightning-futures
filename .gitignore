@@ -30,3 +30,5 @@ bin/record/
 .idea
 build
 cmake-build-debug
+bin/Debug
+src/ctp-lab/

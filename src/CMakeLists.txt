@@ -33,7 +33,8 @@ set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH}
 )
 
 # 包含子项目。
-add_subdirectory ("example")
+#add_subdirectory ("example")
+add_subdirectory ("ctp-lab")
 
 add_subdirectory("framework")
 
