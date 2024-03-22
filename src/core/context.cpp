@@ -583,7 +583,7 @@ void context::handle_tick(const std::vector<std::any>& param)
 		PROFILE_DEBUG("pDepthMarketData->InstrumentID");
 		tick_info&& last_tick = std::any_cast<tick_info>(param[0]);
 		PROFILE_DEBUG(last_tick.id.get_id());
-		LOG_INFO("handle_tick", last_tick.id.get_id(), last_tick.time, " ", _last_tick_time);
+		LOG_DEBUG("handle_tick", last_tick.id.get_id(), last_tick.time, " ", _last_tick_time);
 		if (last_tick.time > _last_tick_time)
 		{
 			_last_tick_time = last_tick.time;

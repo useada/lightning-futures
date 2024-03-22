@@ -59,7 +59,7 @@ void dump_logline(NanoLogLine* line)
 }
 
 
-void init_log(const char* path,size_t file_size)
+void init_log(const char* path,size_t file_size, LogLevel level)
 {
 	if (!std::filesystem::exists(path))
 	{
@@ -72,12 +72,14 @@ void init_log(const char* path,size_t file_size)
 	nanologger.reset(new NanoLogger(path, file_name, file_size, 10240));
 	uint8_t field = static_cast<uint8_t>(LogField::TIME_SPAMP) | static_cast<uint8_t>(LogField::THREAD_ID) | static_cast<uint8_t>(LogField::LOG_LEVEL) | static_cast<uint8_t>(LogField::SOURCE_FILE);
 	uint8_t print = static_cast<uint8_t>(LogPrint::LOG_FILE) | static_cast<uint8_t>(LogPrint::CONSOLE);
-	nanologger->set_option(LogLevel::LLV_TRACE, field, print);
+//	nanologger->set_option(LogLevel::LLV_TRACE, field, print);
+    nanologger->set_option(level, field, print);
 #else
 	nanologger.reset(new NanoLogger(path, file_name, file_size, 1024));
 	uint8_t field = static_cast<uint8_t>(LogField::TIME_SPAMP) | static_cast<uint8_t>(LogField::THREAD_ID) | static_cast<uint8_t>(LogField::LOG_LEVEL) ;
 	uint8_t print = static_cast<uint8_t>(LogPrint::LOG_FILE) ;
-	nanologger->set_option(LogLevel::LLV_INFO, field, print);
+//	nanologger->set_option(LogLevel::LLV_INFO, field, print);
+	nanologger->set_option(level, field, print);
 #endif
 	atomic_nanologger.store(nanologger.get(), std::memory_order_seq_cst);
 	_is_ready.store(true, std::memory_order_release);

@@ -233,6 +233,11 @@ namespace nanolog
 			NanoLogLine* logline = _mq.pop();
 			if (logline)
 			{
+                if (!is_logged(logline->_log_level))
+                {
+                    continue;
+                }
+
 				if (_print & static_cast<uint8_t>(LogPrint::LOG_FILE))
 				{
 					_file_writer->write(*logline, _field);

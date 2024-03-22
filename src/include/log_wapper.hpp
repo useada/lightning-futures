@@ -89,7 +89,7 @@ typedef mpsc::mpsc_queue<NanoLogLine> LoglineQueue;
 
 extern "C"
 {
-	EXPORT_FLAG void init_log(const char* path, size_t file_size);
+	EXPORT_FLAG void init_log(const char* path, size_t file_size, LogLevel level);
 
 	EXPORT_FLAG bool is_ready() ;
 
