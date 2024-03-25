@@ -38,13 +38,13 @@ class dll_helper
 public:
 	static dll_handle load_library(const char *filename)
 	{
-		//std::string dllname = get_dllname(filename);
 		try
 		{
 #ifdef _MSC_VER
 			return ::LoadLibrary(filename);
 #else
-			dll_handle ret = dlopen(filename, RTLD_NOW);
+			std::string dllname = get_dllname(filename);
+			dll_handle ret = dlopen(dllname.c_str(), RTLD_NOW);
 			if (ret == NULL)
 				printf("%s\n", dlerror());
 			return ret;
