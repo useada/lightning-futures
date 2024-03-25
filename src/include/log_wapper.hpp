@@ -40,7 +40,7 @@ enum class LogLevel : uint8_t
 	LLV_FATAL = 5U,
 };
 
-#define LOG_BUFFER_SIZE 2048U
+#define LOG_BUFFER_SIZE 4096U
 #ifndef NDEBUG
 #define LOG_QUEUE_SIZE 16384U
 #else
