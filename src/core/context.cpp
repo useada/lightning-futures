@@ -640,7 +640,7 @@ void context::handle_error(const std::vector<std::any>& param)
 
 void context::calculate_position(const code_t& code, direction_type dir_type, offset_type offset_type, uint32_t volume, double_t price)
 {
-	LOG_INFO("calculate_position ", code.get_id(), dir_type, offset_type, volume, price);
+	LOG_INFO("calculate_position ", "code=", code.get_id(), "direction=", dir_type, "offset=", offset_type, "volume=", volume, "price=", price);
 	position_info p;
 	auto it = _position_info.find(code);
 	if (it != _position_info.end())

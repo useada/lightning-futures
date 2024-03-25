@@ -218,8 +218,11 @@ private:
 		for (const auto& it : _position_info)
 		{
 			const auto& pos = it.second;
-			LOG_INFO("position :", pos.id.get_id(), "today_long(", pos.today_long.postion, pos.today_long.frozen, ") today_short(", pos.today_short.postion, pos.today_short.frozen, ") yestoday_long(", pos.history_long.postion, pos.history_long.frozen, ") yestoday_short(", pos.history_short.postion, pos.history_short.frozen, ")");
-			LOG_INFO("pending :", pos.id.get_id(), pos.long_pending, pos.short_pending);
+			LOG_INFO("position :", pos.id.get_id(), "today_long(", "position=", pos.today_long.postion, "frozen=", pos.today_long.frozen, ")",
+                     "today_short(", "position=", pos.today_short.postion, "frozen=", pos.today_short.frozen, ")",
+                     "yestoday_long(", "position=", pos.history_long.postion, "frozen=", pos.history_long.frozen, ")",
+                     "yestoday_short(", "position=", pos.history_short.postion, "frozen=", pos.history_short.frozen, ")");
+			LOG_INFO("pending :", "code=", pos.id.get_id(), "long pending=", pos.long_pending, "short_pending=", pos.short_pending);
 		}
 	}
 

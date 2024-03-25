@@ -467,7 +467,8 @@ void ctp_api_trader::OnRtnOrder(CThostFtdcOrderField *pOrder)
 	auto direction = wrap_direction_offset(pOrder->Direction, pOrder->CombOffsetFlag[0]);
 	auto offset = wrap_offset_type(pOrder->CombOffsetFlag[0]);
 	auto is_today = (THOST_FTDC_OF_CloseToday == pOrder->CombOffsetFlag[0]);
-	LOG_INFO("OnRtnOrder", estid, pOrder->FrontID, pOrder->SessionID, pOrder->InstrumentID, direction, offset, pOrder->OrderStatus);
+	LOG_INFO("OnRtnOrder", "estid=", estid, "front_id=", pOrder->FrontID, "session_id=", pOrder->SessionID, "instrument_id=", pOrder->InstrumentID,
+             "direction=", direction, "offset=", offset, "order_status=", pOrder->OrderStatus);
 
 	if (pOrder->OrderStatus == THOST_FTDC_OST_Canceled || pOrder->OrderStatus == THOST_FTDC_OST_AllTraded)
 	{
@@ -484,12 +485,12 @@ void ctp_api_trader::OnRtnOrder(CThostFtdcOrderField *pOrder)
 			}
 			if (pOrder->OrderStatus == THOST_FTDC_OST_Canceled)
 			{
-				LOG_INFO("OnRtnOrder fire_event ET_OrderCancel", estid, code.get_id(), direction, offset);
+				LOG_INFO("OnRtnOrder fire_event ET_OrderCancel", "estid=", estid, "code=", code.get_id(), "direction=", direction, "offset=", offset);
 				this->fire_event(trader_event_type::TET_OrderCancel, estid, code, offset, direction, pOrder->LimitPrice, (uint32_t)pOrder->VolumeTotal, (uint32_t)(pOrder->VolumeTraded + pOrder->VolumeTotal));
 			}
 			if (pOrder->OrderStatus == THOST_FTDC_OST_AllTraded)
 			{
-				LOG_INFO("OnRtnOrder fire_event ET_OrderTrade", estid, code.get_id(), direction, offset);
+                LOG_INFO("OnRtnOrder fire_event ET_OrderTrade", "estid=", estid, "code=", code.get_id(), "direction=", direction, "offset=", offset);
 				this->fire_event(trader_event_type::TET_OrderTrade, estid, code, offset, direction, pOrder->LimitPrice, (uint32_t)(pOrder->VolumeTraded + pOrder->VolumeTotal));
 			}
 			_order_info.erase(it);
@@ -626,7 +627,7 @@ bool ctp_api_trader::is_usable()const
 estid_t ctp_api_trader::place_order(offset_type offset, direction_type direction, const code_t& code, uint32_t volume, double_t price, order_flag flag)
 {
 	PROFILE_DEBUG(code.get_id());
-	LOG_INFO("ctp_api_trader place_order %s %d",code.get_id(), volume);
+	LOG_INFO("ctp_api_trader place_order", "code=", code.get_id(), "volume=", volume);
 
 	if (_td_api == nullptr)
 	{
@@ -746,7 +747,8 @@ bool ctp_api_trader::cancel_order(estid_t estid)
 
 	//strcpy_s(req.OrderSysID, change.estid.c_str());
 	strcpy(req.ExchangeID, order.code.get_excg());
-	LOG_INFO("ctp_api_trader ReqOrderAction :", req.ExchangeID, req.InstrumentID, req.FrontID, req.SessionID, req.OrderRef, req.BrokerID, req.InvestorID, req.UserID, estid);
+	LOG_INFO("ctp_api_trader ReqOrderAction:", "exchange id=", req.ExchangeID, ",instrument id=", req.InstrumentID, ",front id=", req.FrontID, ",session id=", req.SessionID,
+             ",order ref=", req.OrderRef, ",broker id=", req.BrokerID, ",investor id=", req.InvestorID, ",user id=", req.UserID, ",estid=", estid);
 	int iResult = _td_api->ReqOrderAction(&req, genreqid());
 	if (iResult != 0)
 	{
