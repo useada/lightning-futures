@@ -113,7 +113,7 @@ void ctp_api_market::OnRspError( CThostFtdcRspInfoField *pRspInfo, int nRequestI
 
 void ctp_api_market::OnFrontConnected()
 {
-	LOG_INFO("Connected : %s", _front_addr.c_str());
+	LOG_INFO("Connected :", _front_addr.c_str());
 	do_userlogin();
 }
 
@@ -121,11 +121,11 @@ void ctp_api_market::OnRspUserLogin( CThostFtdcRspUserLoginField *pRspUserLogin,
 {
 	if(pRspInfo)
 	{
-		LOG_DEBUG("UserLogin : %d -> %s", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+		LOG_DEBUG("UserLogin :", pRspInfo->ErrorID, "->", pRspInfo->ErrorMsg);
 	}
 	if(bIsLast)
 	{
-		LOG_INFO("UserLogin : Market data server logined, {%s} {%s}", pRspUserLogin->TradingDay, pRspUserLogin->UserID);
+		LOG_INFO("UserLogin : Market data server logined,", pRspUserLogin->TradingDay, pRspUserLogin->UserID);
 		//订阅行情数据
 		do_subscribe();
 		if(!_is_inited)
@@ -139,13 +139,13 @@ void ctp_api_market::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CTh
 {
 	if (pRspInfo)
 	{
-		LOG_DEBUG("UserLogout : %d -> %s", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+		LOG_DEBUG("UserLogout :", pRspInfo->ErrorID, "->", pRspInfo->ErrorMsg);
 	}
 }
 
 void ctp_api_market::OnFrontDisconnected( int nReason )
 {
-	LOG_INFO("FrontDisconnected : Reason -> %d", nReason);
+	LOG_INFO("FrontDisconnected : Reason -> ", nReason);
 }
 
 
@@ -206,7 +206,7 @@ void ctp_api_market::OnRspSubMarketData( CThostFtdcSpecificInstrumentField *pSpe
 {
 	if(pRspInfo)
 	{
-		LOG_INFO("SubMarketData : code -> %d %s", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+		LOG_INFO("SubMarketData : error -> ", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 	}
 }
 
@@ -214,7 +214,7 @@ void ctp_api_market::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField* pSp
 {
 	if (pRspInfo)
 	{
-		LOG_INFO("UnSubMarketData : code -> %d %s", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+		LOG_INFO("UnSubMarketData : error -> ", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 	}
 }
 
@@ -233,7 +233,7 @@ void ctp_api_market::do_userlogin()
 	int iResult = _md_api->ReqUserLogin(&req, ++_reqid);
 	if(iResult != 0)
 	{
-		LOG_ERROR("do_userlogin : % d",iResult);
+		LOG_ERROR("do_userlogin :", iResult);
 	}
 }
 

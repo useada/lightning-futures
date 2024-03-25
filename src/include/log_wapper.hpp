@@ -133,22 +133,26 @@ public:
 	typename std::enable_if < !std::is_enum <Frist>::value, void >::type
 		print(Frist firstArg, Types... args) {
 		*_sd << static_cast<std::decay_t<Frist>>(firstArg) << " ";
+//        *_sd << static_cast<std::decay_t<Frist>>(firstArg);
 		print(args...);
 	}
 	template <typename Frist, typename... Types>
 	typename std::enable_if < std::is_enum <Frist>::value, void >::type
 		print(Frist firstArg, Types... args) {
 		*_sd << static_cast<uint8_t>(firstArg) << " ";
+//        *_sd << static_cast<uint8_t>(firstArg);
 		print(args...);
 	}
 	template <typename... Types>
 	void print(const std::string& firstArg, Types... args) {
 		*_sd << firstArg.c_str() << " ";
+//        *_sd << firstArg.c_str();
 		print(args...);
 	}
 	template <typename... Types>
 	void print(char* firstArg, Types... args) {
 		*_sd << static_cast<const char*>(firstArg) << " ";
+//        *_sd << static_cast<const char*>(firstArg);
 		print(args...);
 	}
 	void print()

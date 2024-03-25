@@ -277,9 +277,9 @@ void ctp_api_trader::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, 
 	if (pRspUserLogin)
 	{
 
-		LOG_INFO("[%s][用户登录] UserID:%s AppID:%s SessionID:%d FrontID:%d",
-			datetime_to_string(pRspUserLogin->TradingDay, pRspUserLogin->LoginTime).c_str(),
-			pRspUserLogin->UserID, _appid.c_str(), pRspUserLogin->SessionID, pRspUserLogin->FrontID);
+		LOG_INFO("[", datetime_to_string(pRspUserLogin->TradingDay, pRspUserLogin->LoginTime).c_str(), "][用户登录]",
+			"UserID=", pRspUserLogin->UserID,", AppID=", _appid.c_str(), ",SessionID=", pRspUserLogin->SessionID, ",FrontID=", pRspUserLogin->FrontID);
+
 		//LOG("OnRspUserLogin\tErrorID = [%d] ErrorMsg = [%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 			// 保存会话参数
 		_front_id = pRspUserLogin->FrontID;
