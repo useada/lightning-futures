@@ -150,10 +150,16 @@ public:
 	}
 
 	template <typename... Types>
-	void print(char* firstArg, Types... args) {
+	void print(const char* firstArg, Types... args) {
 		*_sd << static_cast<const char*>(firstArg) << " ";
 		print(args...);
 	}
+
+    template <typename... Types>
+    void print(char* firstArg, Types... args) {
+        *_sd << static_cast<const char*>(firstArg) << " ";
+        print(args...);
+    }
 
 	void print()
 	{
