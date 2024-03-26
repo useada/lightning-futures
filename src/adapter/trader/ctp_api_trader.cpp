@@ -463,6 +463,10 @@ void ctp_api_trader::OnRtnOrder(CThostFtdcOrderField *pOrder)
 	}
 
 	auto estid = generate_estid(pOrder->FrontID, pOrder->SessionID, strtoul(pOrder->OrderRef, NULL, 10));
+
+    LOG_INFO(string_helper::format("generate_estid: estid=%d, front_id=%d, session_id=%d, order_ref=%s",
+                                   estid, pOrder->FrontID, pOrder->SessionID, pOrder->OrderRef));
+
 	auto code = code_t(pOrder->InstrumentID, pOrder->ExchangeID);
 	auto direction = wrap_direction_offset(pOrder->Direction, pOrder->CombOffsetFlag[0]);
 	auto offset = wrap_offset_type(pOrder->CombOffsetFlag[0]);
