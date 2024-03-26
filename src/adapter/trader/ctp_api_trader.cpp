@@ -464,7 +464,7 @@ void ctp_api_trader::OnRtnOrder(CThostFtdcOrderField *pOrder)
 
 	auto estid = generate_estid(pOrder->FrontID, pOrder->SessionID, strtoul(pOrder->OrderRef, NULL, 10));
 
-    LOG_INFO(string_helper::format("generate_estid: estid=%d, front_id=%d, session_id=%d, order_ref=%s",
+    LOG_INFO(string_helper::format("generate_estid: estid={0}, front_id={1}, session_id={2}, order_ref={3}",
                                    estid, pOrder->FrontID, pOrder->SessionID, pOrder->OrderRef));
 
 	auto code = code_t(pOrder->InstrumentID, pOrder->ExchangeID);
