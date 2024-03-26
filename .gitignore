@@ -16,6 +16,8 @@ bin/log/
 bin/light_test/
 bin/*.lib
 bin/*.a
+bin/*.so
+bin/*.ini
 bin/*.dll
 bin/*.dylib
 bin/*.manifest
