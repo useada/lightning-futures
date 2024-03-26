@@ -30,7 +30,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include <data_types.hpp>
 #include <params.hpp>
 #include <condition_variable>
-#include <../../api/CTP_V6.6.9_20220920/ThostFtdcTraderApi.h>
+//#include <../../api/CTP_V6.6.9_20220920/ThostFtdcTraderApi.h>
+#include <ThostFtdcTraderApi.h>
 #include <dll_helper.hpp>
 
 
