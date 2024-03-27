@@ -192,7 +192,7 @@ private:
 		return generate_estid(_front_id, _session_id, _order_ref);
 	}
 
-	inline estid_t generate_estid(uint32_t front_id,uint32_t session_id,uint32_t order_ref)
+	inline estid_t generate_estid(int front_id, int session_id, int order_ref)
 	{
 		uint64_t p1 = (uint64_t)session_id<<32;
 		uint64_t p2 = (uint64_t)front_id<<16;
