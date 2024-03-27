@@ -463,16 +463,15 @@ void ctp_api_trader::OnRtnOrder(CThostFtdcOrderField *pOrder)
 	}
 
 	auto estid = generate_estid(pOrder->FrontID, pOrder->SessionID, strtoul(pOrder->OrderRef, NULL, 10));
-
-    LOG_INFO(string_helper::format("generate_estid: estid={0}, front_id={1}, session_id={2}, order_ref={3}",
-                                   estid, pOrder->FrontID, pOrder->SessionID, pOrder->OrderRef));
-
 	auto code = code_t(pOrder->InstrumentID, pOrder->ExchangeID);
 	auto direction = wrap_direction_offset(pOrder->Direction, pOrder->CombOffsetFlag[0]);
 	auto offset = wrap_offset_type(pOrder->CombOffsetFlag[0]);
 	auto is_today = (THOST_FTDC_OF_CloseToday == pOrder->CombOffsetFlag[0]);
-	LOG_INFO("OnRtnOrder", "estid=", estid, "front_id=", pOrder->FrontID, "session_id=", pOrder->SessionID, "instrument_id=", pOrder->InstrumentID,
-             "direction=", direction, "offset=", offset, "order_status=", pOrder->OrderStatus);
+
+//	LOG_INFO("OnRtnOrder", "estid=", estid, "front_id=", pOrder->FrontID, "session_id=", pOrder->SessionID, "instrument_id=", pOrder->InstrumentID,
+//             "direction=", direction, "offset=", offset, "order_status=", pOrder->OrderStatus);
+    LOG_INFO(string_helper::format("OnRtnOrder: estid={0}, front_id={1}, session_id={2}, code={3}, direction={4}, offset={5}, order_status={6}",
+                                   estid, pOrder->FrontID, pOrder->SessionID, pOrder->InstrumentID, int(direction), int(offset), pOrder->OrderStatus));
 
 	if (pOrder->OrderStatus == THOST_FTDC_OST_Canceled || pOrder->OrderStatus == THOST_FTDC_OST_AllTraded)
 	{
