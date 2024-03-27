@@ -161,6 +161,12 @@ public:
         print(args...);
     }
 
+    template <typename... Types>
+    void print(uint64_t firstArg, Types... args) {
+        *_sd << firstArg << " ";
+        print(args...);
+    }
+
 	void print()
 	{
 		_is_dump = true;
